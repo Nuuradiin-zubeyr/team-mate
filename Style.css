@@ -1,0 +1,192 @@
+:root {
+	--clr-primary: teal;
+	--clr-secondary: crimson;
+	--bg-primary: #0d1a2d;
+	--bg-secondary: #14273e;
+	--text-primary: #fff;
+	--text-secondary: #ccc;
+  }
+  *,
+  *::before,
+  *::after {
+	box-sizing: border-box;
+  }
+  * {
+	margin: 0;
+	font: inherit;
+  }
+  
+  html {
+	color-scheme: dark;
+  }
+  body {
+	font-family: system-ui, sans-serif;
+	min-height: 100vh;
+	background-color: var(--bg-primary);
+	color: var(--text-secondary);
+  }
+  ul:where([role="list"]) {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+  }
+  section {
+	padding-block: clamp(2rem, 5vw, 5rem);
+  }
+  a {
+	color: cyan;
+	text-decoration: none;
+  }
+  .container {
+	width: min(100% - 2rem, 65rem);
+	margin-inline: auto;
+  }
+  .grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: 
+	  repeat(auto-fit, minmax(min(35ch, 100%), 1fr));
+  }
+  .section-title {
+	font-size: clamp(2rem, 5vw, 3rem);
+	text-align: center;
+	font-weight: bold;
+	color: var(--text-primary);
+	margin-bottom: 0.5em;
+  }
+  .flex-group {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+	align-items: center;
+  }
+  .flow-content {
+	display: grid;
+	align-content: start;
+	gap: 1rem;
+  }
+  [data-spacing="sm"] {
+	gap: 0.25rem;
+  }
+  
+  .mx-auto {
+	width: fit-content;
+	margin-inline: auto;
+  }
+  .card {
+	width: min(100% - 2rem, 35ch);
+	margin-inline: auto;
+	background-color: var(--bg-secondary);
+	text-align: center;
+	border-radius: 0.5rem;
+	position: relative;
+	overflow: hidden;
+	display: grid;
+	gap: 0.5rem;
+  }
+  
+  .card__name {
+	font-weight: 700;
+	color: var(--text-primary);
+  }
+  
+  .card__position {
+	font-style: italic;
+  }
+  
+  .card__img {
+	width: 5rem;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 2px solid var(--text-secondary);
+  }
+  
+  .card__front {
+	padding: 2em 2em 2.5em 2em;
+	transition: 
+	  opacity 250ms ease,
+	  transform 450ms ease;
+  }
+  
+  .card[data-visible="false"] .card__front {
+	opacity: 1;
+	transform: translateY(0);
+  }
+  
+  .card__footer {
+	background-color: var(--bg-primary);
+	height: 1.5rem;
+	position: relative;
+	z-index: 5;
+  }
+  
+  .card__back {
+	position: absolute;
+	padding: 2em 2em 2.5em 2em;
+	inset: 0;
+	transition: 
+	  transform 450ms ease,
+	  opacity 150ms ease;
+	z-index: 1;
+	overflow: auto;
+  }
+  
+  .card[data-visible="false"] .card__back {
+	opacity: 0;
+	transform: translateY(100%);
+	overflow: hidden;
+  }
+  
+  .card[data-visible="true"] .card__front {
+	opacity: 0;
+	transform: translateY(100%);
+	transition: 
+	  opacity 150ms ease,
+	  transform 450ms ease 50ms;
+	  overflow: hidden;
+  }
+  
+  .card[data-visible="true"] .card__back {
+	opacity: 1;
+	transform: translateY(0);
+	transition: 
+	  transform 350ms ease,
+	  opacity 450ms ease 100ms;
+	  overflow: hidden;
+  }
+  
+  .card__social {
+	justify-content: center;
+	margin-bottom: 2em;
+  }
+  
+  .card__toggle {
+	text-align: 1;
+	border-radius: 50%;
+	width: 3rem;
+	aspect-ratio: 1 / 1;
+	padding: 0.5em;
+	border: 0;
+	background-color: var(--clr-primary);
+	color: var(--text-primary);
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	cursor: pointer;
+	transition: background-color 250ms ease;
+  }
+  
+  .card__toggle-icon {
+	transition: rotate 250ms ease;
+  }
+  
+  .card[data-visible="true"] .card__toggle {
+	background-color: var(--clr-secondary);
+	overflow: hidden;
+  }
+  
+  .card[data-visible="true"] .card__toggle-icon {
+	rotate: 315deg;
+  }
